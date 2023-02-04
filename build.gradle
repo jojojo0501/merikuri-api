@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.9-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "org.openapi.generator" version "6.2.1"
 }
 
 group = 'com.example'
@@ -22,8 +23,12 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
+	implementation "io.swagger.core.v3:swagger-annotations:2.1.10"
 	compileOnly 'org.projectlombok:lombok'
+	compileOnly 'io.swagger:swagger-annotations:1.6.5'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -32,3 +37,23 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task buildApiDoc(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+	generatorName = "html2"
+	inputSpec = "$rootDir/src/main/resources/api-generator/schema.yaml".toString()
+	outputDir = "$buildDir/apidoc".toString()
+}
+
+task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+	generatorName = "spring"
+	inputSpec = "$rootDir/src/main/resources/api-generator/schema.yaml".toString()
+	outputDir = "$buildDir/spring".toString()
+	apiPackage = "com.example.merikuri.controller"
+	modelPackage = "com.example.merikuri.model"
+	configOptions = [
+			interfaceOnly: "true"
+	]
+}
+
+compileJava.dependsOn tasks.buildSpringServer
+sourceSets.main.java.srcDir "$buildDir/spring/src/main/java"
