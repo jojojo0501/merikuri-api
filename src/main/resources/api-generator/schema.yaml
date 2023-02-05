@@ -1,0 +1,11 @@
+openapi: "3.0.0"
+info:
+  title: Merikuri API Document
+  version: "0.0.1"
+  description: Merikuri API Document
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
