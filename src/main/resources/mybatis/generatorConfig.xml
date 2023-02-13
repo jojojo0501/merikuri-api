@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
     <context id="merikuri" targetRuntime="MyBatis3">
@@ -41,15 +42,23 @@
         <javaTypeResolver>
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
+
         <javaModelGenerator targetPackage="com.example.merikuri.mapper.domain" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
+            <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
-        <sqlMapGenerator targetPackage="xml" targetProject="src/main/resources/mybatis"/>
+
+        <sqlMapGenerator targetPackage="xml" targetProject="src/main/resources/mybatis">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
         <javaClientGenerator targetPackage="com.example.merikuri.mapper" targetProject="src/main/java"
-                             type="MIXEDMAPPER"/>
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
 
         <!-- コードを生成するテーブルを指定 -->
-        <table tableName="users">
+        <table tableName="users" domainObjectName="UserBase">
+            <property name="mapUnderscoreToCamelCase" value="true" />
         </table>
 
     </context>

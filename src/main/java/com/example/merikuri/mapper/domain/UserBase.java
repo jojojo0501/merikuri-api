@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class Users {
+public class UserBase {
     private Long id;
 
     private String firstName;

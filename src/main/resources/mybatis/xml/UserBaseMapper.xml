@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.merikuri.mapper.UsersMapper">
-  <resultMap id="BaseResultMap" type="com.example.merikuri.mapper.domain.Users">
+<mapper namespace="com.example.merikuri.mapper.UserBaseMapper">
+  <resultMap id="BaseResultMap" type="com.example.merikuri.mapper.domain.UserBase">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="first_name" jdbcType="VARCHAR" property="firstName" />
     <result column="last_name" jdbcType="VARCHAR" property="lastName" />
@@ -76,7 +76,7 @@
     id, first_name, last_name, age, tel, address, email, password, created_at, updated_at, 
     delete_flg
   </sql>
-  <select id="selectByExample" parameterType="com.example.merikuri.mapper.domain.UsersExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.merikuri.mapper.domain.UserBaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,13 +90,33 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.merikuri.mapper.domain.UsersExample">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from users
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.merikuri.mapper.domain.UserBaseExample">
     delete from users
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="com.example.merikuri.mapper.domain.Users">
+  <insert id="insert" parameterType="com.example.merikuri.mapper.domain.UserBase">
+    insert into users (id, first_name, last_name, 
+      age, tel, address, 
+      email, password, created_at, 
+      updated_at, delete_flg)
+    values (#{id,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{deleteFlg,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.merikuri.mapper.domain.UserBase">
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -169,7 +189,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.merikuri.mapper.domain.UsersExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.example.merikuri.mapper.domain.UserBaseExample" resultType="java.lang.Long">
     select count(*) from users
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -233,7 +253,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.merikuri.mapper.domain.Users">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.merikuri.mapper.domain.UserBase">
     update users
     <set>
       <if test="firstName != null">
@@ -269,7 +289,21 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.merikuri.mapper.domain.UsersExample" resultMap="BaseResultMap">
+  <update id="updateByPrimaryKey" parameterType="com.example.merikuri.mapper.domain.UserBase">
+    update users
+    set first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      delete_flg = #{deleteFlg,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.merikuri.mapper.domain.UserBaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

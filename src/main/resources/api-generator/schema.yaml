@@ -4,8 +4,63 @@ info:
   version: "0.0.1"
   description: Merikuri API Document
 paths:
-  /test:
-    get:
+  /users:
+    post:
+      summary: "ユーザー登録"
+      description: "ユーザーを登録します"
+      operationId: "createUser"
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserForm"
       responses:
-        '200':
-          description: OK
+        '201':
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+
+components:
+  schemas:
+    UserForm:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "名前"
+        lastName:
+          type: string
+          description: "苗字"
+        age:
+          type: integer
+          description: "年齢"
+        tel:
+          type: string
+          description: "電話番号"
+        address:
+          type: string
+          description: "住所"
+        email:
+          type: string
+          description: "メールアドレス"
+      required:
+        - firstName
+        - lastName
+        - age
+        - tel
+        - address
+        - email
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: "ユーザーID"
+      required:
+        - id

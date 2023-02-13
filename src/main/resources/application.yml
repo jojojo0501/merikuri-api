@@ -5,3 +5,5 @@ spring:
     password: password
     sql-script-encoding: utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mybatis/xml/*.xml
