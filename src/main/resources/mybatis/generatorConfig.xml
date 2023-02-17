@@ -59,6 +59,7 @@
         <!-- コードを生成するテーブルを指定 -->
         <table tableName="users" domainObjectName="UserBase">
             <property name="mapUnderscoreToCamelCase" value="true" />
+            <generatedKey column="id" sqlStatement="JDBC" />
         </table>
 
     </context>

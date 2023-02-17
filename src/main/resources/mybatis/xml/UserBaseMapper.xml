@@ -106,22 +106,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.merikuri.mapper.domain.UserBase">
-    insert into users (id, first_name, last_name, 
-      age, tel, address, 
-      email, password, created_at, 
-      updated_at, delete_flg)
-    values (#{id,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{deleteFlg,jdbcType=BIT})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.merikuri.mapper.domain.UserBase" useGeneratedKeys="true">
+    insert into users (first_name, last_name, age, 
+      tel, address, email, 
+      password, created_at, updated_at, 
+      delete_flg)
+    values (#{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deleteFlg,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.merikuri.mapper.domain.UserBase">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.merikuri.mapper.domain.UserBase" useGeneratedKeys="true">
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="firstName != null">
         first_name,
       </if>
@@ -154,9 +151,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="firstName != null">
         #{firstName,jdbcType=VARCHAR},
       </if>

@@ -1,7 +1,8 @@
 package com.example.merikuri.service;
 
+import com.example.merikuri.controller.param.UserFormParam;
+import com.example.merikuri.controller.result.CreateUserResult;
 import com.example.merikuri.model.User;
-import com.example.merikuri.model.UserForm;
 import com.example.merikuri.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createUser(UserForm form){
-        userRepository.insert(User.fromForm(form));
+    public CreateUserResult createUser(UserFormParam param) {
+        User user = userRepository.register(User.fromParam(param));
+        return CreateUserResult.fromModel(user);
     }
 }

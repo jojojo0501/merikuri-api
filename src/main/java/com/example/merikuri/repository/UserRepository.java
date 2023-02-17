@@ -12,13 +12,10 @@ public class UserRepository {
 
     private final UserBaseMapper userBaseMapper;
 
-    public void insert(User user){
+    public User register(User user){
         UserBase base = User.fromModel(user);
         userBaseMapper.insert(base);
+        return User.fromBase(base);
     }
 
-    public UserBase select(){
-        return
-        userBaseMapper.selectByPrimaryKey(Long.valueOf(1));
-    }
 }
