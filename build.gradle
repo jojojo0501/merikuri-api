@@ -68,7 +68,8 @@ task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.Gene
 	apiPackage = "com.example.merikuri.controller"
 	modelPackage = "com.example.merikuri.model"
 	configOptions = [
-			interfaceOnly: "true"
+			interfaceOnly: "true",
+			hideGenerationTimestamp: "true"
 	]
 }
 
