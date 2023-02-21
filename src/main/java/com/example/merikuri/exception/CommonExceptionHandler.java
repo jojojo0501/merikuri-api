@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.stream.Collectors;
 
+/**
+ * 共通のExceptionHandler.
+ */
 @RestControllerAdvice
 public class CommonExceptionHandler {
 

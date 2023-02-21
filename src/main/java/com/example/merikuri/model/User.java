@@ -8,10 +8,64 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * ユーザーモデル.
+ */
 @AllArgsConstructor
 @Data
 public class User {
 
+    /**
+     * id
+     */
+    private Long id;
+
+    /**
+     * 名前
+     */
+    private String firstName;
+
+    /**
+     * 苗字
+     */
+    private String lastName;
+
+    /**
+     * 年齢
+     */
+    private Integer age;
+
+    /**
+     * 電話番号
+     */
+    private String tel;
+
+    /**
+     * 住所
+     */
+    private String address;
+
+    /**
+     * メール
+     */
+    private String email;
+
+    /**
+     * パスワード
+     */
+    private String password;
+
+    /**
+     * コンストラクタ.
+     *
+     * @param firstName firstName
+     * @param lastName  lastName
+     * @param age       age
+     * @param tel       tel
+     * @param address   address
+     * @param email     email
+     * @param password  password
+     */
     public User(String firstName, String lastName, Integer age,
                 String tel, String address, String email, String password) {
         this.firstName = firstName;
@@ -23,23 +77,12 @@ public class User {
         this.password = password;
     }
 
-    private Long id;
-
-    private String firstName;
-
-    private String lastName;
-
-    private Integer age;
-
-    private String tel;
-
-    private String address;
-
-    private String email;
-
-    private String password;
-
-
+    /**
+     * paramをmodelに変換する.
+     *
+     * @param param param
+     * @return モデル
+     */
     public static User fromParam(UserFormParam param) {
         return new User(
                 param.getRequest().getFirstName(),
@@ -52,6 +95,12 @@ public class User {
         );
     }
 
+    /**
+     * modelをbaseに変換する.
+     *
+     * @param user モデル
+     * @return base
+     */
     public static UserBase fromModel(User user) {
         LocalDateTime localDateTime = LocalDateTime.now();
         return new UserBase(user.getId(),
@@ -68,6 +117,12 @@ public class User {
         );
     }
 
+    /**
+     * baseをmodelに変換する.
+     *
+     * @param base base
+     * @return model
+     */
     public static User fromBase(UserBase base) {
         return new User(base.getId(),
                 base.getFirstName(),

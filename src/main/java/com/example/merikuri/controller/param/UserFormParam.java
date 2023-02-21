@@ -4,9 +4,15 @@ import com.example.merikuri.model.CreateUserRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * ユーザー作成のParam.
+ */
 @Getter
 @AllArgsConstructor
 public class UserFormParam {
 
+    /**
+     * リクエスト
+     */
     CreateUserRequest request;
 }
