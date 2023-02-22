@@ -64,12 +64,17 @@ task buildApiDoc(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTa
 task buildSpringServer(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
 	generatorName = "spring"
 	inputSpec = "$rootDir/src/main/resources/api-generator/schema.yaml".toString()
-	outputDir = "$buildDir/spring".toString()
-	apiPackage = "com.example.merikuri.controller"
-	modelPackage = "com.example.merikuri.model"
+	outputDir = "$rootDir".toString()
+	apiPackage = "com.example.merikuri.generated.controller"
+	modelPackage = "com.example.merikuri.generated.model"
 	configOptions = [
+			dateLibrary: "java8",
 			interfaceOnly: "true",
-			hideGenerationTimestamp: "true"
+			hideGenerationTimestamp: "true",
+			skipDefaultInterfase: "true",
+			booleanGetterPrefix: "is",
+			useTags: "true",
+			ignoreFileOverride: ".openapi-generator-ignore"
 	]
 }
 

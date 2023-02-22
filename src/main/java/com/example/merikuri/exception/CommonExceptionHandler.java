@@ -1,10 +1,11 @@
 package com.example.merikuri.exception;
 
 import com.example.merikuri.common.constant.ResponseCode;
-import com.example.merikuri.model.BadRequestResponse;
-import com.example.merikuri.model.BadRequestResponseInvalidParamsInner;
-import com.example.merikuri.model.NotFoundResponse;
-import com.example.merikuri.model.ServerErrorResponse;
+
+import com.example.merikuri.generated.model.BadRequestResponse;
+import com.example.merikuri.generated.model.BadRequestResponseInvalidParamsInner;
+import com.example.merikuri.generated.model.NotFoundResponse;
+import com.example.merikuri.generated.model.ServerErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

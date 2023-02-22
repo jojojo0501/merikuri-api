@@ -2,7 +2,7 @@ package com.example.merikuri.controller;
 
 import com.example.merikuri.common.constant.ResponseCode;
 import com.example.merikuri.controller.result.CreateUserResult;
-import com.example.merikuri.model.CreatedResponse;
+import com.example.merikuri.generated.model.CreatedResponse;
 
 /**
  * ユーザー情報を扱うConverter.

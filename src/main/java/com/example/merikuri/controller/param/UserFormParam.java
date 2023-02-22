@@ -1,6 +1,6 @@
 package com.example.merikuri.controller.param;
 
-import com.example.merikuri.model.CreateUserRequest;
+import com.example.merikuri.generated.model.CreateUserRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

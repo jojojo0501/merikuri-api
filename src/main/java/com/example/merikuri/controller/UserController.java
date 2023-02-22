@@ -1,8 +1,9 @@
 package com.example.merikuri.controller;
 
 import com.example.merikuri.controller.param.UserFormParam;
-import com.example.merikuri.model.CreateUserRequest;
-import com.example.merikuri.model.CreatedResponse;
+import com.example.merikuri.generated.controller.UsersApi;
+import com.example.merikuri.generated.model.CreateUserRequest;
+import com.example.merikuri.generated.model.CreatedResponse;
 import com.example.merikuri.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class UserController implements UsersApi {
      */
     @Override
     public ResponseEntity<CreatedResponse> createUser(CreateUserRequest request) {
-        CreatedResponse response = null;
+        com.example.merikuri.generated.model.CreatedResponse response = null;
         try {
             response = UserConverter.toCreatedResponse(
                     userService.createUser(new UserFormParam(request))
