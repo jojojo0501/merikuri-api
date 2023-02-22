@@ -1,0 +1,8 @@
+value:
+  firstName: '謙信'
+  lastName: '上杉'
+  age: 30
+  tel: '123-4567-8910'
+  address: '越後国'
+  email: 'sengoku@gmail.com'
+  password: 'hogehoge'

@@ -1,0 +1,47 @@
+post:
+  summary: "ユーザー登録"
+  description: "ユーザーを登録します"
+  operationId: "createUser"
+  tags:
+    - users
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../components/users/CreateUserRequest.yaml"
+        example:
+            $ref: "../examples/users/CreateUserRequestExample.yaml"
+  responses:
+    '201':
+      description: "Created"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/CreatedResponse.yaml"
+          example:
+            $ref: "../examples/commons/CreatedResponseExample.yaml"
+    '400':
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/BadRequestResponse.yaml"
+          example:
+            $ref: "../examples/commons/BadRequestResponseExample.yaml"
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/NotFoundResponse.yaml"
+          example:
+            $ref: "../examples/commons/NotFoundResponseExample.yaml"
+    '500':
+      description: "Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/ServerErrorResponse.yaml"
+          example:
+            $ref: "../examples/commons/ServerErrorResponseExample.yaml"

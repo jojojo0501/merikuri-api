@@ -1,0 +1,3 @@
+value:
+  code: 'NOT_FOUND'
+  message: 'ユーザーが存在しません。'

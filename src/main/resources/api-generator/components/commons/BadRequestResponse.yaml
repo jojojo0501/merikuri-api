@@ -1,0 +1,28 @@
+title: BadRequestResponse
+description: 400エラーのレスポンス
+type: object
+properties:
+  code:
+    type: string
+    description: "コード"
+  message:
+    type: string
+    default: "リクエストが不正です。"
+    description: "メッセージ"
+  invalid-params:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "フィールド名"
+        reason:
+          type: string
+          description: "エラー理由"
+      required:
+        - name
+        - reason
+required:
+  - code
+  - message

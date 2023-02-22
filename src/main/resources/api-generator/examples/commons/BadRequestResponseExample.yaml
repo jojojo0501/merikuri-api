@@ -1,0 +1,8 @@
+value:
+  code: 'BAD_REQUEST'
+  message: 'リクエストが不正です。'
+  invalid-params:
+    - name: 'firstName'
+      reason: '1〜15文字で入力してください。'
+    - name: 'email'
+      reason: 'メールアドレスの形式で入力してください。'
