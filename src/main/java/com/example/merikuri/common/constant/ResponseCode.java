@@ -1,5 +1,8 @@
 package com.example.merikuri.common.constant;
 
+/**
+ * レスポンスコード
+ */
 public enum ResponseCode {
     SUCCESS,
     UNAUTHORIZED,

@@ -1,7 +1,6 @@
 package com.example.merikuri.exception;
 
 import com.example.merikuri.common.constant.ResponseCode;
-
 import com.example.merikuri.generated.model.BadRequestResponse;
 import com.example.merikuri.generated.model.BadRequestResponseInvalidParamsInner;
 import com.example.merikuri.generated.model.NotFoundResponse;
@@ -20,6 +19,12 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class CommonExceptionHandler {
 
+    /**
+     * BadRequestExceptionをハンドリングする.
+     *
+     * @param e エラー
+     * @return レスポンス
+     */
     @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<BadRequestResponse> handleBadRequestException(BadRequestException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -29,6 +34,14 @@ public class CommonExceptionHandler {
                 );
     }
 
+    /**
+     * MethodArgumentNotValidExceptionをハンドリングする.
+     * <p>
+     * Open API Generatorでバリデーション時に発生するException
+     *
+     * @param e エラー
+     * @return レスポンス
+     */
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<BadRequestResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 
@@ -44,6 +57,12 @@ public class CommonExceptionHandler {
                 );
     }
 
+    /**
+     * NotFoundExceptionをハンドリングする.
+     *
+     * @param e エラー
+     * @return レスポンス
+     */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<NotFoundResponse> handleNotFoundException(NotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -53,8 +72,14 @@ public class CommonExceptionHandler {
                 );
     }
 
+    /**
+     * NotFoundExceptionをハンドリングする.
+     *
+     * @param e エラー
+     * @return レスポンス
+     */
     @ExceptionHandler(ServerErrorException.class)
-    public ResponseEntity<ServerErrorResponse> handleServerErrorException(NotFoundException e) {
+    public ResponseEntity<ServerErrorResponse> handleServerErrorException(ServerErrorResponse e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ServerErrorResponse().
                         code(ResponseCode.SERVER_ERROR.name())
