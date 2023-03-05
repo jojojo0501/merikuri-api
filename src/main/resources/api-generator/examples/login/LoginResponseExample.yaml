@@ -1,0 +1,11 @@
+value:
+  code: 'SUCCESS'
+  message: 'ログインに成功しました。'
+  info:
+    userId: 1555
+    firstName: "太郎"
+    lastName: "佐藤"
+    age: 30
+    tel: "090-1234-5678"
+    address: "札幌馬牧場"
+    email: "sato@gmail.com"

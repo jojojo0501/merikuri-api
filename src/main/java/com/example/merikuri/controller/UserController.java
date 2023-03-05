@@ -1,10 +1,17 @@
 package com.example.merikuri.controller;
 
+import com.example.merikuri.common.constant.ResponseCode;
+import com.example.merikuri.controller.param.LoginParam;
 import com.example.merikuri.controller.param.UserFormParam;
+import com.example.merikuri.exception.BadRequestException;
+import com.example.merikuri.exception.CheckedException;
+import com.example.merikuri.exception.NotFoundException;
 import com.example.merikuri.generated.controller.UsersApi;
 import com.example.merikuri.generated.model.CreateUserRequest;
 import com.example.merikuri.generated.model.CreatedResponse;
-import com.example.merikuri.service.UserService;
+import com.example.merikuri.generated.model.LoginResponse;
+import com.example.merikuri.service.CreateUserService;
+import com.example.merikuri.service.LoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class UserController implements UsersApi {
 
-    private final UserService userService;
+    private final CreateUserService createUserService;
+    private final LoginService loginService;
+    private final UserConverter userConverter;
 
     /**
      * 新規ユーザーを作成する.
@@ -27,14 +36,43 @@ public class UserController implements UsersApi {
      */
     @Override
     public ResponseEntity<CreatedResponse> createUser(CreateUserRequest request) {
-        com.example.merikuri.generated.model.CreatedResponse response = null;
+        CreatedResponse response = null;
         try {
-            response = UserConverter.toCreatedResponse(
-                    userService.createUser(new UserFormParam(request))
+            response = userConverter.toCreatedResponse(
+                    createUserService.createUser(new UserFormParam(request))
             );
-        } catch (Exception e) {
-            //TODO 例外処理（Handler実装）
+        } catch (CheckedException e) {
+            if (ResponseCode.BAD_REQUEST == e.getCode()) {
+                throw new BadRequestException(e.getMessage());
+            }
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    /**
+     * ログインする.
+     *
+     * @param email    メールアドレス
+     * @param password パスワード
+     * @return レスポンス
+     */
+    @Override
+    public ResponseEntity<LoginResponse> login(String email, String password) {
+
+        LoginResponse response = null;
+        try {
+            response = userConverter.toLoginResponse(
+                    loginService.login(new LoginParam(email, password))
+            );
+        } catch (CheckedException e) {
+            if (ResponseCode.BAD_REQUEST == e.getCode()) {
+                throw new BadRequestException(e.getMessage());
+            }
+            if (ResponseCode.NOT_FOUND == e.getCode()) {
+                throw new NotFoundException(e.getMessage());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

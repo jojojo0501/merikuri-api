@@ -4,22 +4,23 @@ import com.example.merikuri.common.constant.ResponseCode;
 import lombok.Getter;
 
 /**
- * サーバーエラー（500）
+ * 共通エラー.
  */
 @Getter
-public class ServerErrorException extends Exception {
+public class CheckedException extends Exception {
 
     /**
      * コード
      */
-    private final ResponseCode code = ResponseCode.SERVER_ERROR;
+    private final ResponseCode code;
 
     /**
      * メッセージ
      */
     private final String message;
 
-    public ServerErrorException(String message) {
+    public CheckedException(ResponseCode code,String message) {
+        this.code = code;
         this.message = message;
     }
 }

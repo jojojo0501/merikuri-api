@@ -3,15 +3,18 @@ package com.example.merikuri.model;
 import com.example.merikuri.common.constant.DeleteFlg;
 import com.example.merikuri.controller.param.UserFormParam;
 import com.example.merikuri.mapper.domain.UserBase;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ユーザーモデル.
  */
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 public class User {
 
@@ -58,23 +61,27 @@ public class User {
     /**
      * コンストラクタ.
      *
-     * @param firstName firstName
-     * @param lastName  lastName
-     * @param age       age
-     * @param tel       tel
-     * @param address   address
-     * @param email     email
-     * @param password  password
+     * @param param param
      */
-    public User(String firstName, String lastName, Integer age,
-                String tel, String address, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.tel = tel;
-        this.address = address;
-        this.email = email;
-        this.password = password;
+    public User(UserFormParam param) {
+        this.firstName = param.getRequest().getFirstName();
+        this.lastName = param.getRequest().getLastName();
+        this.age = param.getRequest().getAge();
+        this.tel = param.getRequest().getTel();
+        this.address = param.getRequest().getAddress();
+        this.email = param.getRequest().getEmail();
+        this.password = param.getRequest().getPassword();
+    }
+
+    public User(UserBase base) {
+        this.id = base.getId();
+        this.firstName = base.getFirstName();
+        this.lastName = base.getLastName();
+        this.age = base.getAge();
+        this.tel = base.getTel();
+        this.address = base.getAddress();
+        this.email = base.getEmail();
+        this.password = base.getPassword();
     }
 
     /**
@@ -84,15 +91,7 @@ public class User {
      * @return モデル
      */
     public static User fromParam(UserFormParam param) {
-        return new User(
-                param.getRequest().getFirstName(),
-                param.getRequest().getLastName(),
-                param.getRequest().getAge(),
-                param.getRequest().getTel(),
-                param.getRequest().getAddress(),
-                param.getRequest().getEmail(),
-                param.getRequest().getPassword()
-        );
+        return new User(param);
     }
 
     /**
@@ -124,15 +123,16 @@ public class User {
      * @return model
      */
     public static User fromBase(UserBase base) {
-        return new User(base.getId(),
-                base.getFirstName(),
-                base.getLastName(),
-                base.getAge(),
-                base.getTel(),
-                base.getAddress(),
-                base.getEmail(),
-                base.getPassword()
-        );
+        return new User(base);
     }
 
+    /**
+     * baseリストをmodelリストに変換する.
+     *
+     * @param baselist データリスト
+     * @return modelList
+     */
+    public static List<User> fromBaseList(List<UserBase> baselist) {
+        return baselist.stream().map(User::fromBase).collect(Collectors.toList());
+    }
 }

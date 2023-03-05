@@ -12,7 +12,7 @@ public class NotFoundException extends RuntimeException {
     /**
      * コード
      */
-    private final String code = ResponseCode.NOT_FOUND.name();
+    private final ResponseCode code = ResponseCode.NOT_FOUND;
 
     /**
      * メッセージ
