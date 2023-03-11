@@ -36,9 +36,7 @@ public class LoginService {
 
         User user = userList.stream().findFirst()
                 .orElseThrow(() -> new CheckedException(
-                        ResponseCode.BAD_REQUEST,
-                        "メールアドレスまたはパスワードが違います。")
-                );
+                        ResponseCode.BAD_REQUEST, "メールアドレスまたはパスワードが違います。"));
 
         return new LoginResult(user);
     }
