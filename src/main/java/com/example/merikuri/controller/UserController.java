@@ -5,7 +5,7 @@ import com.example.merikuri.controller.param.LoginParam;
 import com.example.merikuri.controller.param.UserFormParam;
 import com.example.merikuri.exception.BadRequestException;
 import com.example.merikuri.exception.CheckedException;
-import com.example.merikuri.exception.NotFoundException;
+import com.example.merikuri.exception.ServerErrorException;
 import com.example.merikuri.generated.controller.UsersApi;
 import com.example.merikuri.generated.model.CreateUserRequest;
 import com.example.merikuri.generated.model.CreatedResponse;
@@ -68,8 +68,8 @@ public class UserController implements UsersApi {
             if (ResponseCode.BAD_REQUEST == e.getCode()) {
                 throw new BadRequestException(e.getMessage());
             }
-            if (ResponseCode.NOT_FOUND == e.getCode()) {
-                throw new NotFoundException(e.getMessage());
+            if (ResponseCode.SERVER_ERROR == e.getCode()) {
+                throw new ServerErrorException(e.getMessage());
             }
         }
 

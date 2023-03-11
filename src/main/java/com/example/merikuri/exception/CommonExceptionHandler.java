@@ -78,7 +78,7 @@ public class CommonExceptionHandler {
      * @return レスポンス
      */
     @ExceptionHandler(ServerErrorException.class)
-    public ResponseEntity<ServerErrorResponse> handleServerErrorException(ServerErrorResponse e) {
+    public ResponseEntity<ServerErrorResponse> handleServerErrorException(ServerErrorException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ServerErrorResponse().
                         code(ResponseCode.SERVER_ERROR.name())

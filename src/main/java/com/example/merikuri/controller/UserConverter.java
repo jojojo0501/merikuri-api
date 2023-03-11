@@ -40,6 +40,7 @@ public class UserConverter {
                         .firstName(result.getUser().getFirstName())
                         .lastName(result.getUser().getLastName())
                         .age(result.getUser().getAge())
+                        .tel(result.getUser().getTel())
                         .address(result.getUser().getAddress())
                         .email(result.getUser().getEmail())
                 );

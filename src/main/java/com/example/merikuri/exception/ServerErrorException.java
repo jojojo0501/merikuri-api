@@ -7,7 +7,7 @@ import lombok.Getter;
  * サーバーエラー（500）
  */
 @Getter
-public class ServerErrorException extends Exception {
+public class ServerErrorException extends RuntimeException {
 
     /**
      * コード
