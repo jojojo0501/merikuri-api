@@ -7,3 +7,6 @@ info:
 paths:
   /users:
     $ref: 'paths/users.yaml'
+  /login:
+    $ref: 'paths/login.yaml'
+

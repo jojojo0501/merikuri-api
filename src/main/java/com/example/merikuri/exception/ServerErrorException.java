@@ -7,12 +7,12 @@ import lombok.Getter;
  * サーバーエラー（500）
  */
 @Getter
-public class ServerErrorException extends Exception {
+public class ServerErrorException extends RuntimeException {
 
     /**
      * コード
      */
-    private final String code = ResponseCode.NOT_FOUND.name();
+    private final ResponseCode code = ResponseCode.SERVER_ERROR;
 
     /**
      * メッセージ

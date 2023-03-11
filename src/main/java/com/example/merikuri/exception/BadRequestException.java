@@ -12,7 +12,7 @@ public class BadRequestException extends RuntimeException {
     /**
      * コード
      */
-    private final String code = ResponseCode.BAD_REQUEST.name();
+    private final ResponseCode code = ResponseCode.BAD_REQUEST;
 
     /**
      * メッセージ

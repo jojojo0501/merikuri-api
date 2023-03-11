@@ -1,0 +1,54 @@
+get:
+  summary: "ログイン"
+  description: "メールアドレスとパスワードからユーザーを検索します"
+  operationId: "login"
+  tags:
+    - users
+  parameters:
+    - name: email
+      description: メールアドレス
+      schema:
+        type: string
+      example: 'test@gmail.com'
+      required: true
+      in: query
+    - name: password
+      description: パスワード
+      schema:
+        type: string
+      example: 'hogehoge'
+      required: true
+      in: query
+  responses:
+    '200':
+      description: "Success"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/login/LoginResponse.yaml"
+          example:
+            $ref: "../examples/login/LoginResponseExample.yaml"
+    '400':
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/BadRequestResponse.yaml"
+          example:
+            $ref: "../examples/commons/BadRequestResponseExample.yaml"
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/NotFoundResponse.yaml"
+          example:
+            $ref: "../examples/commons/NotFoundResponseExample.yaml"
+    '500':
+      description: "Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: "../components/commons/ServerErrorResponse.yaml"
+          example:
+            $ref: "../examples/commons/ServerErrorResponseExample.yaml"

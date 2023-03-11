@@ -1,18 +1,18 @@
 package com.example.merikuri.controller.result;
 
+import com.example.merikuri.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * ユーザー作成のResult.
+ * ログインのResult.
  */
 @AllArgsConstructor
 @Getter
-public class CreateUserResult {
+public class LoginResult {
 
     /**
-     * ユーザーID
+     * ユーザー情報
      */
-    private long id;
-
+    private User user;
 }

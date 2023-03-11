@@ -1,0 +1,49 @@
+title: LoginResponse
+description: ログインのレスポンス
+type: object
+properties:
+  code:
+    type: string
+    description: "コード"
+  message:
+    type: string
+    description: "メッセージ"
+  info:
+    type: object
+    description: "ユーザー情報"
+    properties:
+      userId:
+        type: integer
+        format: int64
+        description: "ユーザーID"
+      firstName:
+        type: string
+        description: "名前"
+      lastName:
+        type: string
+        description: "苗字"
+      age:
+        type: integer
+        format: int32
+        description: "年齢"
+      tel:
+        type: string
+        description: "電話番号"
+      address:
+        type: string
+        description: "住所"
+      email:
+        type: string
+        description: "メールアドレス"
+    required:
+      - userId
+      - firstName
+      - lastName
+      - age
+      - tel
+      - address
+      - email
+required:
+  - code
+  - message
+  - info

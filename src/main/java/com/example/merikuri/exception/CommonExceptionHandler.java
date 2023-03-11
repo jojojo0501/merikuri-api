@@ -36,7 +36,6 @@ public class CommonExceptionHandler {
 
     /**
      * MethodArgumentNotValidExceptionをハンドリングする.
-     * <p>
      * Open API Generatorでバリデーション時に発生するException
      *
      * @param e エラー
@@ -73,17 +72,34 @@ public class CommonExceptionHandler {
     }
 
     /**
-     * NotFoundExceptionをハンドリングする.
+     * ServerErrorExceptionをハンドリングする.
      *
      * @param e エラー
      * @return レスポンス
      */
     @ExceptionHandler(ServerErrorException.class)
-    public ResponseEntity<ServerErrorResponse> handleServerErrorException(ServerErrorResponse e) {
+    public ResponseEntity<ServerErrorResponse> handleServerErrorException(ServerErrorException e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ServerErrorResponse().
                         code(ResponseCode.SERVER_ERROR.name())
                         .message(e.getMessage())
                 );
     }
+
+    /**
+     * 予期せぬエラーをハンドリングする.
+     *
+     * @param e エラー
+     * @return レスポンス
+     */
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<ServerErrorResponse> handleUnexpectedErrorException(Throwable e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ServerErrorResponse().
+                        code(ResponseCode.SERVER_ERROR.name())
+                        .message("予期せぬエラーが発生しました。")
+                );
+    }
+
+
 }
