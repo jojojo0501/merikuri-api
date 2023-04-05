@@ -4,22 +4,23 @@ import com.example.merikuri.common.constant.ResponseCode;
 import lombok.Getter;
 
 /**
- * サーバーエラー（400）
+ * 共通エラー.
  */
 @Getter
-public class NotFoundException extends RuntimeException {
+public class CheckedException extends Exception {
 
     /**
      * コード
      */
-    private final ResponseCode code = ResponseCode.NOT_FOUND;
+    private final ResponseCode code;
 
     /**
      * メッセージ
      */
     private final String message;
 
-    public NotFoundException(String message) {
+    public CheckedException(ResponseCode code,String message) {
+        this.code = code;
         this.message = message;
     }
 }

@@ -38,8 +38,8 @@ public class BadRequestResponseInvalidParamsInner {
    * フィールド名
    * @return name
   */
-  @NotNull 
-  @Schema(name = "name", description = "フィールド名", required = true)
+  
+  @Schema(name = "name", description = "フィールド名", required = false)
   public String getName() {
     return name;
   }
@@ -57,8 +57,8 @@ public class BadRequestResponseInvalidParamsInner {
    * エラー理由
    * @return reason
   */
-  @NotNull 
-  @Schema(name = "reason", description = "エラー理由", required = true)
+  
+  @Schema(name = "reason", description = "エラー理由", required = false)
   public String getReason() {
     return reason;
   }

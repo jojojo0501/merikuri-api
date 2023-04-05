@@ -20,9 +20,6 @@ properties:
         reason:
           type: string
           description: "エラー理由"
-      required:
-        - name
-        - reason
 required:
   - code
   - message

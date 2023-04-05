@@ -8,6 +8,7 @@ package com.example.merikuri.generated.controller;
 import com.example.merikuri.generated.model.BadRequestResponse;
 import com.example.merikuri.generated.model.CreateUserRequest;
 import com.example.merikuri.generated.model.CreatedResponse;
+import com.example.merikuri.generated.model.LoginResponse;
 import com.example.merikuri.generated.model.NotFoundResponse;
 import com.example.merikuri.generated.model.ServerErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -84,6 +85,59 @@ public interface UsersApi {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"code\" : \"code\", \"message\" : \"message\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /login : ログイン
+     * メールアドレスとパスワードからユーザーを検索します
+     *
+     * @param email メールアドレス (required)
+     * @param password パスワード (required)
+     * @return Success (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
+     *         or Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "login",
+        summary = "ログイン",
+        tags = { "users" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Success", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = BadRequestResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = NotFoundResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Server Error", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ServerErrorResponse.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/login",
+        produces = { "application/json" }
+    )
+    default ResponseEntity<LoginResponse> login(
+        @NotNull @Parameter(name = "email", description = "メールアドレス", required = true) @Valid @RequestParam(value = "email", required = true) String email,
+        @NotNull @Parameter(name = "password", description = "パスワード", required = true) @Valid @RequestParam(value = "password", required = true) String password
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"code\" : \"code\", \"message\" : \"message\", \"info\" : { \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"address\" : \"address\", \"tel\" : \"tel\", \"userId\" : 0, \"age\" : 6, \"email\" : \"email\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

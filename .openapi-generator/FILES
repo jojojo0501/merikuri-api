@@ -6,5 +6,7 @@ src/main/java/com/example/merikuri/generated/model/BadRequestResponse.java
 src/main/java/com/example/merikuri/generated/model/BadRequestResponseInvalidParamsInner.java
 src/main/java/com/example/merikuri/generated/model/CreateUserRequest.java
 src/main/java/com/example/merikuri/generated/model/CreatedResponse.java
+src/main/java/com/example/merikuri/generated/model/LoginResponse.java
+src/main/java/com/example/merikuri/generated/model/LoginResponseInfo.java
 src/main/java/com/example/merikuri/generated/model/NotFoundResponse.java
 src/main/java/com/example/merikuri/generated/model/ServerErrorResponse.java
