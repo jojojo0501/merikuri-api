@@ -1,4 +1,5 @@
 SET CHARSET UTF8;
+SET FOREIGN_KEY_CHECKS = 0;
 drop table if exists users cascade;
 CREATE TABLE users (
     user_id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -124,3 +125,4 @@ CREATE TABLE notice_contents (
     delete_flg BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (notice_title_id) REFERENCES notice_titles (notice_title_id)
 );
+SET FOREIGN_KEY_CHECKS = 1;
